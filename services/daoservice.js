@@ -9,7 +9,7 @@ const conopts = {
     user: 'postgres',
     password: 'piirrustus',
     host: 'aliasdb.crhrxstner7x.eu-central-1.rds.amazonaws.com',
-    database: 'aliasdb',
+    database: 'postgres',
     port: 5432
 }
 //console.log(process.env.DB_CONNECTIONSTRING)
