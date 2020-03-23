@@ -19,4 +19,5 @@ app.use('/', indexRouter);
 app.use('/scores', scoresRouter);
 app.use('/words', wordsRouter);
 
+
 module.exports = app;
