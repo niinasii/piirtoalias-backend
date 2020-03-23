@@ -7,9 +7,9 @@ const debug = require('debug')('piirtoalias-backend:pgdao');
 
 const conopts = {
     user: 'postgres',
-    password: 'alias4!',
-    host: '',
-    database: 'postgres',
+    password: 'piirrustus',
+    host: 'aliasdb.crhrxstner7x.eu-central-1.rds.amazonaws.com',
+    database: 'aliasdb',
     port: 5432
 }
 //console.log(process.env.DB_CONNECTIONSTRING)
@@ -20,49 +20,36 @@ process.on('exit', () => {
     pool.end();
 });
 
-//get all   
-// const getAll = (cb) => {
-//     pool.query('SELECT * from topics', (err, results) => {
-//         if (err) throw err;
-//         console.dir(results);
-//         cb(results.rows);
-//     })
-// }
+const getAllWords = (cb) => {
+    pool.query('SELECT * from words', (err, results) => {
+        if (err) throw err;
+        console.dir(results);
+        cb(results.rows);
+    })
+}
 
-// const getOne = (id, cb) => {
-//     pool.query('SELECT * FROM topics WHERE id = $1', [id], (err, results) => {
-//         if (err) throw err;
-//         console.dir(results.rows);
-//         cb(results.rows);
-//     })
-// }
-// const createOne = (newtopic, cb) => {
-//     const { title, description, timetomaster, timespent, source, startdate, inprogress, completiondate } = newtopic;
-//     pool.query('INSERT INTO topics (title, description, timetomaster, timespent, source, startdate, inprogress, completiondate) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)', 
-//     [title, description, timetomaster, timespent, source, startdate, inprogress, completiondate], (err, results) => {
-//         if (err) throw err; 
-//         console.dir(results);
-//         cb(results.rowCount);
-//     })
-// }
+const getOneWord = (id, cb) => {
+    pool.query('SELECT * FROM words WHERE id = $1', [id], (err, results) => {
+        if (err) throw err;
+        console.dir(results.rows);
+        cb(results.rows);
+    })
+}
 
-// const updateOne= (topic, id, cb) => {
-//     const { title, description, timetomaster, timespent, source, startdate, inprogress, completiondate } = topic;
-//     pool.query('UPDATE topics SET title = $1, description = $2, timetomaster = $3, timespent = $4, source = $5, startdate = $6, inprogress = $7, completiondate = $8 WHERE id = $9', 
-//     [title, description, timetomaster, timespent, source, startdate, inprogress, completiondate, id], (err, results) => {
-//         if (err) throw err;
-//         console.dir(results);
-//         cb(results.rowCount);
-//     })
-// }
+const getAllScores = (cb) => {
+    pool.query('SELECT * from scores', (err, results) => {
+        if (err) throw err;
+        console.dir(results);
+        cb(results.rows);
+    })
+}
 
-// const deleteOne = (id, cb) => {
-//     pool.query('DELETE FROM topics WHERE id = $1', [id], (err, results) => {
-//         if (err) throw err;
-//         console.dir(results);
-//         cb(results.rowCount);
-//     })
-// }
+const getOneScore = (id, cb) => {
+    pool.query('SELECT * FROM scores WHERE id = $1', [id], (err, results) => {
+        if (err) throw err;
+        console.dir(results.rows);
+        cb(results.rows);
+    })
+}
 
-
-module.exports = { getAll, getOne, createOne, updateOne }
+module.exports = { getAllWords, getOneWord, getAllScores, getOneScore }
