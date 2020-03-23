@@ -7,7 +7,6 @@ var indexRouter = require('./routes/index');
 var scoresRouter = require('./routes/scores');
 var wordsRouter = require('./routes/words');
 
-
 var app = express();
 
 app.use(logger('dev'));
