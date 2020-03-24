@@ -1,13 +1,12 @@
+require('dotenv').config();
 const Pool = require('pg').Pool;
 const debug = require('debug')('piirtoalias-backend:pgdao');
-// require('dotenv').config();
-
-// const USER = process.env.PGUSER;
-// const PASSWORD = process.env.PGPASSWORD;
+const USER = process.env.PGUSER;
+const PASSWORD = process.env.PGPASSWORD;
 
 const conopts = {
-    user: 'postgres',
-    password: 'piirrustus',
+    user: USER,
+    password: PASSWORD,
     host: 'aliasdb.crhrxstner7x.eu-central-1.rds.amazonaws.com',
     database: 'postgres',
     port: 5432
