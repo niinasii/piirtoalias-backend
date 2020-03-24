@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const dao = require('../services/daoservice');
 
+//hakee kaikki pelaajat ja heidän pisteet
 router.get('/', function (req, res, next) {
   //   res.send('Ja yhteys on!');
   dao.getAllScores((rows) => {
@@ -9,11 +10,11 @@ router.get('/', function (req, res, next) {
   })
 });
 
-router.get('/:id', function (req, res, next) {
-  dao.getOneScore(req.params.id, (rows) => {
-    res.json(rows[0]);
-  })
-})
+// router.get('/:id', function (req, res, next) {
+//   dao.getOneScore(req.params.id, (rows) => {
+//     res.json(rows[0]);
+//   })
+// })
 
 // router.post('/', function (req, res, next) {
 //   dao.createOne(req.body, (rowCount) => {

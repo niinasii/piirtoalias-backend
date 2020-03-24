@@ -19,6 +19,7 @@ process.on('exit', () => {
     pool.end();
 });
 
+//hakee kaikki sanat
 const getAllWords = (cb) => {
     pool.query('SELECT * from words', (err, results) => {
         if (err) throw err;
@@ -26,15 +27,7 @@ const getAllWords = (cb) => {
         cb(results.rows);
     })
 }
-
-const getOneWord = (id, cb) => {
-    pool.query('SELECT * FROM words WHERE id = $1', [id], (err, results) => {
-        if (err) throw err;
-        console.dir(results.rows);
-        cb(results.rows);
-    })
-}
-
+//hakee kaikki pelaajat ja heidän pistemääränsä
 const getAllScores = (cb) => {
     pool.query('SELECT * from scores', (err, results) => {
         if (err) throw err;
@@ -42,13 +35,13 @@ const getAllScores = (cb) => {
         cb(results.rows);
     })
 }
+//hakee yden pelaajan ja hänen pisteet id:n perusteella ---> tarvitsee id:n
+// const getOneScore = (id, cb) => {
+//     pool.query('SELECT * FROM scores WHERE id = $1', [id], (err, results) => {
+//         if (err) throw err;
+//         console.dir(results.rows);
+//         cb(results.rows);
+//     })
+// }
 
-const getOneScore = (id, cb) => {
-    pool.query('SELECT * FROM scores WHERE id = $1', [id], (err, results) => {
-        if (err) throw err;
-        console.dir(results.rows);
-        cb(results.rows);
-    })
-}
-
-module.exports = { getAllWords, getOneWord, getAllScores, getOneScore }
+module.exports = { getAllWords, getAllScores, getOneScore }
