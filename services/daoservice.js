@@ -35,13 +35,5 @@ const getAllScores = (cb) => {
         cb(results.rows);
     })
 }
-//hakee yden pelaajan ja hänen pisteet id:n perusteella ---> tarvitsee id:n
-// const getOneScore = (id, cb) => {
-//     pool.query('SELECT * FROM scores WHERE id = $1', [id], (err, results) => {
-//         if (err) throw err;
-//         console.dir(results.rows);
-//         cb(results.rows);
-//     })
-// }
 
-module.exports = { getAllWords, getAllScores, getOneScore }
+module.exports = { getAllWords, getAllScores }
