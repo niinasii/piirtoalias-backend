@@ -96,9 +96,18 @@ function onListening() {
 /**
  * Socket ion
  */
+var line_history = [];
+
+
 io.on('connection', function (socket) {
-  console.log("user connected")
-  socket.on('chat message', function(msg){
-    io.emit('chat message', msg);
-  });
+
+ socket.on('sana', function (wrd) {
+  io.emit('sana', wrd);
 });
+  
+  socket.on('chat message', function(msg){
+    console.log("user connected")
+    io.emit('chat message', msg);
+  
+  
+})})
