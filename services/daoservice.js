@@ -44,4 +44,6 @@ const getAllScores = (cb) => {
 //     })
 // }
 
+
 module.exports = { getAllWords, getAllScores }
+
