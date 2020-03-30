@@ -91,4 +91,4 @@ const deletePlayer = (id, callback) => {
     })
 }
 
-module.exports = { getAllWords, getAllScores, getPlayers, insertPlayer, updatePlayer, deletePlayer }
+module.exports = { getAllWords, getAllScores, getPlayers, getPlayer, insertPlayer, updatePlayer, deletePlayer }
