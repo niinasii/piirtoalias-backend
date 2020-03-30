@@ -100,7 +100,7 @@ var line_history = [];
 
 
 io.on('connection', function (socket) {
-
+  console.log(socket.client.conn.server.clientsCount + " users connected: " + socket.id)
  socket.on('sana', function (wrd) {
   io.emit('sana', wrd);
 });
