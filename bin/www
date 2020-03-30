@@ -98,16 +98,20 @@ function onListening() {
  */
 var line_history = [];
 
+var socketid = [];
 
 io.on('connection', function (socket) {
+  socketid.push(socket.id)
+  console.log(socketid)
+  socket.on('sana', function (wrd) {
+    io.emit('sana', wrd);
+  });
 
- socket.on('sana', function (wrd) {
-  io.emit('sana', wrd);
-});
-  
-  socket.on('chat message', function(msg){
+  socket.on('chat message', function (msg) {
     console.log("user connected")
     io.emit('chat message', msg);
-  
-  
-})})
+
+  })
+})
+
+module.exports = {socketid}
