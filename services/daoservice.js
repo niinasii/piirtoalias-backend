@@ -1,7 +1,10 @@
 // require('dotenv').config();
 const Pool = require('pg').Pool;
 const debug = require('debug')('piirtoalias-backend:pgdao');
+
 var sio = require('../bin/www')
+var arpoa = require('./arpomisfunktio')
+
 // const USER = process.env.PGUSER;
 // const PASSWORD = process.env.PGPASSWORD;
 
@@ -61,13 +64,12 @@ const getPlayer = (id, callback) => {
 }
 
 let sokettiID = sio.socketid
+let vuorostatus = arpoa.result //antaa statukseksi alustavasti false eli ei vuorossa
 
 //Lisätään uusi pelaaja kantaan, kanta generoi id, mutta socketid pitää saada clientista
 //mistä saadaan turn arvo false/true ja mikä lähtöarvo? Sijaitsee turn arvon antamisen logiikkaa clientissa vai bäckissä?
 const insertPlayer = (newplayer, callback) => {
-    let socketid = sokettiID;
-    let turn; //tähän turnin arvoksi tulos, joka saadaan vuoronarvontalogiikasta, boolean datatyyppi true/false
-    const { socketid, turn } = newplayer;
+    const { socketid = sokettiID, turn = vuorostatus } = newplayer; // tuloksena pitää olla newplayer.socketid = value ja newplayer.turn = value
     pool.query("INSERT INTO players (socketid, turn) VALUES ($1, $2)", [socketid, turn], (error, data) => {
         if (error) throw error;
         console.dir(data.rows);
