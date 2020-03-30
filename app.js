@@ -7,6 +7,7 @@ var cors = require('cors');
 var indexRouter = require('./routes/index');
 var scoresRouter = require('./routes/scores');
 var wordsRouter = require('./routes/words');
+var playerRouter = require('./routes/players');
 
 var app = express();
 app.use(cors());
@@ -20,6 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/scores', scoresRouter);
 app.use('/words', wordsRouter);
+app.use('/players', playerRouter)
 
 
 module.exports = app;
