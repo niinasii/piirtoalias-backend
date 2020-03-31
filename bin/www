@@ -104,15 +104,16 @@ io.on('connection', function (socket) {
   socketid.push(socket.id)
   //console.log(socketid);
 
+socket.on('chat message', function(msg){
+    console.log(socket.client.conn.server.clientsCount + " users connected: " + socket.id)
+    io.emit('chat message', msg);
+  });
+
   socket.on('sana', function (wrd) {
     io.to(`${vuorossaID}`).emit('sana', wrd);
     console.log('Vuorossa on ' + vuorossaID + ' sanalla: ' + sana)
   });
 
-  socket.on('chat message', function (msg) {
-    console.log("user connected")
-    io.emit('chat message', msg);
-  })
 })
 
 /**
