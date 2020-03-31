@@ -104,7 +104,7 @@ io.on('connection', function (socket) {
   socketid.push(socket.id)
   //console.log(socketid);
 
-socket.on('chat message', function(msg){
+  socket.on('chat message', function (msg) {
     console.log(socket.client.conn.server.clientsCount + " users connected: " + socket.id)
     io.emit('chat message', msg);
   });
@@ -121,16 +121,26 @@ socket.on('chat message', function(msg){
 
 function resolveAfter4Seconds() {
   return new Promise(resolve => {
-      setTimeout(() => {
-          resolve( socketid );
-      }, 4000);
+    setTimeout(() => {
+      resolve(socketid);
+    }, 4000);
   });
 }
 
 async function arpoa() {
-  let soketit = await resolveAfter4Seconds() ;
+  let soketit = await resolveAfter4Seconds();
   const vuorossaID = soketit[Math.floor(Math.random() * soketit.length)];
-  console.log("vuorossa on "+ vuorossaID)
+  console.log("Ensimmäisessä vuorossa on " + vuorossaID)
 }
 
-arpoa();
+function intialTrigger() {
+  arpoa();
+}
+
+const laterTrigger = (callback) => {
+  const vuorossaID = soketit[Math.floor(Math.random() * soketit.length)];
+  console.log("Nyt vuorossa on " + vuorossaID)
+  callback(vuorossaID);
+}
+
+module.exports = {intialTrigger, laterTrigger}
