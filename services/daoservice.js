@@ -2,9 +2,6 @@
 const Pool = require('pg').Pool;
 const debug = require('debug')('piirtoalias-backend:pgdao');
 
-var sio = require('../bin/www')
-var arpoa = require('./arpomisfunktio')
-
 // const USER = process.env.PGUSER;
 // const PASSWORD = process.env.PGPASSWORD;
 
@@ -63,20 +60,18 @@ const getPlayer = (id, callback) => {
     })
 }
 
-let sokettiID = sio.socketid
-let vuorostatus = arpoa.result //antaa statukseksi alustavasti false eli ei vuorossa
-
 //Lisätään uusi pelaaja kantaan, kanta generoi id, mutta socketid pitää saada clientista
 //mistä saadaan turn arvo false/true ja mikä lähtöarvo? Sijaitsee turn arvon antamisen logiikkaa clientissa vai bäckissä?
 const insertPlayer = (newplayer, callback) => {
-    const { socketid = sokettiID, turn = vuorostatus } = newplayer; // tuloksena pitää olla newplayer.socketid = value ja newplayer.turn = value
-    pool.query("INSERT INTO players (socketid, turn) VALUES ($1, $2)", [socketid, turn], (error, data) => {
+    const { socketid } = newplayer; // tuloksena pitää olla newplayer.socketid = value
+    pool.query("INSERT INTO players (socketid) VALUES ($1)", [socketid], (error, data) => {
         if (error) throw error;
         console.dir(data.rows);
         callback(data.rowCount);
     })
 }
 
+//let vuorostatus = arpoa.result //antaa statukseksi alustavasti false eli ei vuorossa
 //päivitetään pelaajan tiedot kannassa
 //ainoastaan turn(false/true) sarake (mutta koska put, niin kaikki sarakkeet pitää ilmoittaa ilmeisesti?)
 //Päivitetään piirtovuorossa olevan pelaajan vuorostatus truesta falseksi kun vuoro vaihtuu

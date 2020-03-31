@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const dao = require('../services/daoservice');
+var dao = require('../services/daoservice');
 
 //hakee kaikki sanat
 router.get('/', function (req, res, next) {
