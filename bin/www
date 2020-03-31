@@ -113,7 +113,6 @@ socket.on('chat message', function(msg){
     io.to(`${vuorossaID}`).emit('sana', wrd);
     console.log('Vuorossa on ' + vuorossaID + ' sanalla: ' + sana)
   });
-
 })
 
 /**
@@ -132,7 +131,6 @@ async function arpoa() {
   let soketit = await resolveAfter4Seconds() ;
   const vuorossaID = soketit[Math.floor(Math.random() * soketit.length)];
   console.log("vuorossa on "+ vuorossaID)
-
 }
 
 arpoa();
