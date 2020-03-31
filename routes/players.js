@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-const dao = require('../services/daoservice');
+var dao = require('../services/daoservice');
+
 
 // Haetaan kaikki pelaajat kannasta
 router.route('/players')

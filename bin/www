@@ -96,18 +96,43 @@ function onListening() {
 /**
  * Socket ion
  */
-var line_history = [];
 
+var line_history = [];
+var socketid = [];
 
 io.on('connection', function (socket) {
-  console.log(socket.client.conn.server.clientsCount + " users connected: " + socket.id)
- socket.on('sana', function (wrd) {
-  io.emit('sana', wrd);
-});
-  
-  socket.on('chat message', function(msg){
-    console.log("user connected")
+  socketid.push(socket.id)
+  //console.log(socketid);
+
+socket.on('chat message', function(msg){
+    console.log(socket.client.conn.server.clientsCount + " users connected: " + socket.id)
     io.emit('chat message', msg);
-  
-  
-})})
+  });
+
+  socket.on('sana', function (wrd) {
+    io.to(`${vuorossaID}`).emit('sana', wrd);
+    console.log('Vuorossa on ' + vuorossaID + ' sanalla: ' + sana)
+  });
+
+})
+
+/**
+ * ARPOMISFUNKTIOT SANALLE JA VUOROSSA OLEVALLE
+ */
+
+function resolveAfter4Seconds() {
+  return new Promise(resolve => {
+      setTimeout(() => {
+          resolve( socketid );
+      }, 4000);
+  });
+}
+
+async function arpoa() {
+  let soketit = await resolveAfter4Seconds() ;
+  const vuorossaID = soketit[Math.floor(Math.random() * soketit.length)];
+  console.log("vuorossa on "+ vuorossaID)
+
+}
+
+arpoa();
