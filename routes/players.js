@@ -1,8 +1,18 @@
 var express = require('express');
 var router = express.Router();
-var dao = require('../services/daoservice');
+//var dao = require('../services/daoservice');
+var sio = require ('../bin/www');
 
-// Haetaan kaikki pelaajat kannasta
+// Arvotaan socketID:t
+router.route('/players')
+.get(function (req, res, next) {
+  sio.laterTrigger(data => {
+    res.status(200 || 201).json({ message: 'Nyt vuorossa on ' + vuorossaID})
+  })
+})
+
+
+/*
 router.route('/players')
   .get(function (req, res, next) {
     dao.getPlayers(rows => {
@@ -10,7 +20,6 @@ router.route('/players')
     });
   })
 
-//Lisätään uusi pelaaja kantaan, jolla on id, socketid ja piirtovuoro true/false
   .post(function (req, res, next) {
     dao.insertPlayer(req.body, (rowCount) => {
       if (rowCount > 0)
@@ -21,7 +30,6 @@ router.route('/players')
     });
   })
 
-//Haetaan se pelaaja jonka piirtovuoro on true
 router.route('/players/:id')
   .get(function (req, res, next) {
     dao.getPlayer(req.params.id, (rows) => {
@@ -29,7 +37,6 @@ router.route('/players/:id')
     });
   })
 
-//Päivitetään piirtovuorossa olevan pelaajan vuorostatus truesta falseksi kun vuoro vaihtuu
   .put(function (req, res, next) {
     dao.updatePlayer(req.body, req.params.id, (rowCount) => {
       if (rowCount > 0)
@@ -40,7 +47,6 @@ router.route('/players/:id')
     });
   })
 
-//poistetaan pelaaja kannasta, kun hän kirjautuu ulos ja sulkee siten socketinsa.
   .delete(function (req, res, next) {
     dao.deletePlayer(req.params.id, (rowCount) => {
       if (rowCount > 0)
@@ -50,5 +56,6 @@ router.route('/players/:id')
       }
     });
   });
+*/
 
 module.exports = router;
