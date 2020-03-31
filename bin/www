@@ -113,7 +113,6 @@ io.on('connection', function (socket) {
     io.to(`${vuorossaID}`).emit('sana', wrd);
     console.log('Vuorossa on ' + vuorossaID + ' sanalla: ' + sana)
   });
-
 })
 
 /**
