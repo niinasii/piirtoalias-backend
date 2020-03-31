@@ -13,6 +13,8 @@ router.route('/players')
 
 
 /*
+
+// Haetaan kaikki pelaajat kannasta
 router.route('/players')
   .get(function (req, res, next) {
     dao.getPlayers(rows => {
